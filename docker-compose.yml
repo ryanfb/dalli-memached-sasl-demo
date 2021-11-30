@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  dalli_304:
+    image: ruby:3.0.3
+    volumes:
+      - .:/ruby-test
+    entrypoint: ["/ruby-test/ruby-setup.sh"]
+    command: ["bundle", "exec", "/ruby-test/ruby-test.rb"]
+    depends_on:
+      - memcached-sasl
+    environment:
+      - DALLI_VERSION=3.0.4
+  dalli_305:
+    image: ruby:3.0.3
+    volumes:
+      - .:/ruby-test
+    entrypoint: ["/ruby-test/ruby-setup.sh"]
+    command: ["bundle", "exec", "/ruby-test/ruby-test.rb"]
+    depends_on:
+      - memcached-sasl
+    environment:
+      - DALLI_VERSION=3.0.5
+  memcached-sasl:
+    image: remotepixel/memcached-sasl
+    environment:
+      - MEMCACHED_USERNAME=memcachedtest
+      - MEMCACHED_PASSWORD=memcachedtest
+
