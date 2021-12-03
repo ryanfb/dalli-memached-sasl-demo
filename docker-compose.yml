@@ -30,6 +30,16 @@ services:
       - memcached-sasl
     environment:
       - DALLI_VERSION=3.0.6
+  dalli_310:
+    image: ruby:3.0.3
+    volumes:
+      - .:/ruby-test
+    entrypoint: ["/ruby-test/ruby-setup.sh"]
+    command: ["bundle", "exec", "/ruby-test/ruby-test.rb"]
+    depends_on:
+      - memcached-sasl
+    environment:
+      - DALLI_VERSION=3.1.0
   memcached-sasl:
     image: remotepixel/memcached-sasl
     environment:
